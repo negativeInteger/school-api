@@ -11,5 +11,10 @@ app.use('/', schoolRoutes);
 const PORT = process.env.PORT || 3000;
 // Start the Express server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  }
+}).on('error', (err) => {
+  console.error('Failed to start server:', err);
+  process.exit(1); // Exit process if server fails to start
 });
