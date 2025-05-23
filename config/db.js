@@ -16,12 +16,16 @@ require('dotenv').config();
  * - `connectionLimit`: Maximum number of connections allowed in the pool.
  */
 const pool = mysql.createPool({
-    host: process.env.DB_HOST,           
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT), // DB_PORT for Production      
     user: process.env.DB_USER,           
     password: process.env.DB_PASSWORD,   
     database: process.env.DB_NAME,       
     waitForConnections: true,
     connectionLimit: 10, // max simultaneous connections
+    ssl: {
+    rejectUnauthorized: false,
+  }
 });
 
 // Export the pool wrapped in a Promise API for async/await usage
