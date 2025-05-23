@@ -10,7 +10,7 @@ app.use('/', schoolRoutes);
 
 app.get('/my-ip', async (req, res) => {
   try {
-    const response = await fetch('https://ifconfig.me');
+    const response = await fetch('https://ifconfig.me/ip');
     const ip = await response.text();
     res.json({ outboundIP: ip });
   } catch (error) {
