@@ -8,6 +8,16 @@ app.use(express.json());
 // Mount the school-related routes at the root path
 app.use('/', schoolRoutes);
 
+app.get('/my-ip', async (req, res) => {
+  try {
+    const response = await fetch('https://ifconfig.me');
+    const ip = await response.text();
+    res.json({ outboundIP: ip });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get IP', details: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 // Start the Express server
 app.listen(PORT, () => {
